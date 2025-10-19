@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <title>Topcuoglu Law Firm</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #1A2745;
+            --accent: #f0b429;
+            --bg: #f8f9fb;
+            --text: #222;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Maven Pro", sans-serif;
+            color: var(--text);
+            background-color: var(--bg);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--primary);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--bg);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--bg);
+            border-radius: 5px;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            right: 30px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .mobile-menu a {
+            padding: 10px 20px;
+            border-bottom: 1px solid #eee;
+            text-decoration: none;
+            color: #222;
+        }
+
+        .mobile-menu a:hover {
+            background: #f5f5f5;
+        }
+
+        section {
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #anasayfa {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(26, 39, 69, 0.8), rgba(26, 39, 69, 0.8)), url('./image (1).webp');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            min-height: 100vh;
+            padding: 80px 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        #anasayfa h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        #anasayfa p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--accent);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #e0a320;
+            transform: translateY(-2px);
+        }
+
+        #faaliyet {
+            background: #fff;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary);
+            font-size: 2.5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        #makaleler {
+            background: var(--bg);
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .article-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        #iletisim {
+            background: #fff;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            gap: 15px;
+        }
+
+        input,
+        textarea {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            width: 100%;
+            font-family: "Maven Pro", sans-serif;
+        }
+
+        button {
+            padding: 12px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--primary);
+            color: white;
+        }
+
+        footer .footer-info {
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0;
+            }
+
+            section {
+                padding: 0 20px;
+            }
+
+            header {
+                padding: 0 15px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-menu.show {
+                display: flex;
+                margin-top: 30px;
+            }
+
+            #anasayfa h1 {
+                font-size: 2rem;
+            }
+
+            #anasayfa p {
+                font-size: 1rem;
+            }
+
+            #makaleler {
+                padding-block: 20px;
+            }
+
+            #iletisim {
+                margin-bottom: 20px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="shortcut icon" href="./aa.svg" type="image/x-icon">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="./image-99.png" width="200" height="100" alt="Topcuoglu Law Firm Logo" />
+        </div>
+        <nav>
+            <a href="#anasayfa">Anasayfa</a>
+            <a href="#faaliyet">Faaliyet Alanlarımız</a>
+            <a href="#makaleler">Makaleler</a>
+            <a href="#iletisim">İletişim</a>
+        </nav>
+
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#anasayfa">Anasayfa</a>
+            <a href="#faaliyet">Faaliyet Alanlarımız</a>
+            <a href="#makaleler">Makaleler</a>
+            <a href="#iletisim">İletişim</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="anasayfa">
+            <div class="hero-content">
+                <h1>Hoş Geldiniz</h1>
+                <p>Profesyonel ve güvenilir hukuk hizmetleri sunuyoruz.</p>
+                <a href="#iletisim" class="btn">Hemen İletişime Geçin</a>
+            </div>
+        </section>
+
+        <section id="faaliyet">
+            <h2 class="section-title">Faaliyet Alanlarımız</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Aile Hukuku</h3>
+                    <p>Boşanma, nafaka, velayet, mal paylaşımı ve diğer aile hukuku konularında uzman danışmanlık.</p>
+                </div>
+                <div class="service-card">
+                    <h3>İş Hukuku</h3>
+                    <p>İş sözleşmeleri, işçi-işveren uyuşmazlıkları, iş kazaları ve iş hukukunun tüm alanlarında hizmet.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <h3>Ticaret Hukuku</h3>
+                    <p>Şirket kuruluşu, sözleşmeler, ticari uyuşmazlıklar ve ticaret hukukunun diğer konularında destek.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="makaleler">
+            <h2 class="section-title">Makaleler</h2>
+            <div class="articles-grid">
+                <article class="article-card">
+                    <h3>Boşanma Davalarında Mal Paylaşımı</h3>
+                    <p>Mal paylaşımı, evlilik birliği içinde edinilen malların boşanma sonrası paylaşılması sürecidir.
+                        Bu süreçte edinilmiş malların yasal çerçevede adil bir şekilde paylaştırılması önem taşır.</p>
+                </article>
+                <article class="article-card">
+                    <h3>İş Sözleşmelerinde Dikkat Edilmesi Gerekenler</h3>
+                    <p>İş sözleşmeleri, işçi ve işveren arasındaki hak ve yükümlülükleri belirleyen temel belgelerdir.
+                        Sözleşme maddelerinin doğru şekilde düzenlenmesi, ileride çıkabilecek uyuşmazlıkların önlenmesi
+                        açısından kritiktir.</p>
+                </article>
+                <article class="article-card">
+                    <h3>Miras Hukukunda Yasal Haklar</h3>
+                    <p>Miras hukuku, kişinin ölümü sonrasında mal varlığının kimlere ve nasıl paylaştırılacağını
+                        düzenler. Yasal mirasçıların haklarını bilmesi ve bu hakları koruması önem taşımaktadır.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="iletisim">
+            <h2 class="section-title">İletişim</h2>
+            <form>
+                <input type="text" placeholder="İsim" required>
+                <input type="text" placeholder="Soyisim" required>
+                <input type="tel" placeholder="Telefon" required>
+                <input type="email" placeholder="E-posta" required>
+                <textarea rows="5" placeholder="Mesajınız" required></textarea>
+                <button type="submit">Gönder</button>
+            </form>
+        </section>
+    </div>
+
+    <footer>
+        <div>📞 0 (212) 123 45 67 | ✉️ info@topcuogluhukuk.com</div>
+        <div class="footer-info">© 2025 Topcuoglu Hukuk Bürosu. Tüm hakları saklıdır.</div>
+    </footer>
+
+    <script>
+        // Scroll animasyonları
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => observer.observe(section));
+
+        // Mobil menü toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('show');
+        });
+
+        // Menüye tıklayınca otomatik kapatma
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('show');
+            });
+        });
+    </script>
+</body>
+
+</html>
